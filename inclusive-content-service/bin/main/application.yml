@@ -1,0 +1,32 @@
+spring:
+  session:
+    store-type: none
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 12MB
+
+  liquibase:
+    changeLog: classpath:db/changelog/db.changelog-master.xml
+
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+      write-date-timestamps-as-nanoseconds: false
+      indent-output: true
+    date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
+
+  jpa:
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+        globally_quoted_identifiers_skip_column_definitions: true
+    hibernate:
+      ddlAuto: validate
+    open-in-view: false # we need to be careful with OSIV! It may slow down our services. https://www.baeldung.com/spring-open-session-in-view
+
+gentleman-toolkit:
+  enabled: true
+  provide-exception-handlers: true
+  provide-logging-filter: true
